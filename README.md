@@ -62,11 +62,9 @@ span projection output is what is released here.
 
 ## License
 
-This data is released under CC BY 4.0. You are free to share and adapt it, including for
-commercial use, as long as you give appropriate credit.
+This data is released under CC BY 4.0. You are free to share and adapt it as long as you give appropriate credit.
 
 Beyond that requirement, a request. If you use this data in a public facing downstream
 application, please acknowledge the Dharmamitra project, and we would appreciate hearing from
 you at dharmamitra-project@gmail.com, ideally before you launch, so we can stay aware of how
-the data is being used and help where useful. This is a courtesy request and not a condition
-of the license.
+the data is being used and help where useful.

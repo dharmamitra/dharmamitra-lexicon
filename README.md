@@ -59,3 +59,14 @@ src_sentence the full source sentence
 Statistical aligners (eflomal) and neural embedding aligners (awesome-align) were evaluated
 against this method on the same data and scored well below it in a blind LLM arena, so the
 span projection output is what is released here.
+
+## License
+
+This data is released under CC BY 4.0. You are free to share and adapt it, including for
+commercial use, as long as you give appropriate credit.
+
+Beyond that requirement, a request. If you use this data in a public facing downstream
+application, please acknowledge the Dharmamitra project, and we would appreciate hearing from
+you at dharmamitra-project@gmail.com, ideally before you launch, so we can stay aware of how
+the data is being used and help where useful. This is a courtesy request and not a condition
+of the license.

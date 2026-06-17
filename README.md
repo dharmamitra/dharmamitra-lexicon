@@ -4,6 +4,8 @@ Word and phrase level translation spans between Sanskrit, Tibetan and Chinese Bu
 canonical texts, mined from aligned parallel text. Each record is one attested occurrence
 of one source term together with its translation span in the target, with character offsets.
 
+This data powers the live application at https://lexicon.dharmamitra.org/
+
 ## Layout
 
 ```

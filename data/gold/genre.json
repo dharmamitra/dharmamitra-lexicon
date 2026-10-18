@@ -1,0 +1,402 @@
+{
+"test/GK19asvbh_test.tsv:111": {
+"genre": "poetry",
+"period": "Classical"
+},
+"test/GK19asvbh_test.tsv:31": {
+"genre": "poetry",
+"period": "Classical"
+},
+"test/GK21sokss_test.tsv:134": {
+"genre": "poetry",
+"period": "Medieval"
+},
+"test/GK21sokss_test.tsv:2": {
+"genre": "poetry",
+"period": "Medieval"
+},
+"test/GSD36manu_test.tsv:274": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"test/GSP27yogva_test.tsv:311": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"test/GV03sb_test.tsv:472": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"test/itihasa-test-extract.tsv:378": {
+"genre": "epic",
+"period": "Epic"
+},
+"test/itihasa-test-extract.tsv:478": {
+"genre": "epic",
+"period": "Epic"
+},
+"test/itihasa-test-extract.tsv:90": {
+"genre": "epic",
+"period": "Epic"
+},
+"train/cc-by-nc-nd/GSP30tantralu2.tsv:1590": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"train/cc-by-nc-nd/GSP30tantralu2.tsv:1924": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"train/cc-by-nc-nd/GSP30tantralu2.tsv:3156": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"train/cc-by-nc-nd/GSP30tantralu2.tsv:3722": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"train/cc-by-nc-nd/GSP30tantralu2.tsv:478": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"train/cc-by-nc-nd/GSP30tantralu2.tsv:547": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"train/cc-by-sa/G14garsa-eng.tsv:2109": {
+"genre": "rel_script",
+"period": "Medieval"
+},
+"train/cc-by-sa/G14garsa-eng.tsv:4314": {
+"genre": "rel_script",
+"period": "Medieval"
+},
+"train/cc-by-sa/GE07hv_conpu.tsv:3943": {
+"genre": "epic",
+"period": "Epic"
+},
+"train/cc-by-sa/GE07hv_conpu.tsv:4604": {
+"genre": "epic",
+"period": "Epic"
+},
+"train/cc-by-sa/GE07hv_conpu.tsv:5695": {
+"genre": "epic",
+"period": "Epic"
+},
+"train/cc-by-sa/GE07hv_conpu.tsv:7048": {
+"genre": "epic",
+"period": "Epic"
+},
+"train/cc-by-sa/GE07hv_conpu.tsv:7226": {
+"genre": "epic",
+"period": "Epic"
+},
+"train/cc-by-sa/GK16dkavy.tsv:199": {
+"genre": "poetry",
+"period": "Classical"
+},
+"train/cc-by-sa/GP12visnup.tsv:1262": {
+"genre": "purana",
+"period": "Classical"
+},
+"train/cc-by-sa/GP12visnup.tsv:1454": {
+"genre": "purana",
+"period": "Classical"
+},
+"train/cc-by-sa/GP12visnup.tsv:2559": {
+"genre": "purana",
+"period": "Classical"
+},
+"train/cc-by-sa/GP12visnup.tsv:2593": {
+"genre": "purana",
+"period": "Classical"
+},
+"train/cc-by-sa/GP12visnup.tsv:3026": {
+"genre": "purana",
+"period": "Classical"
+},
+"train/cc-by-sa/GS38kautil.tsv:1554": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GS38kautil.tsv:1643": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GS38kautil.tsv:2634": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GS38kautil.tsv:2885": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GS38kautil.tsv:334": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GS38kautil.tsv:699": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GS38kautil.tsv:703": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GS38kautil.tsv:854": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GS38kautil.tsv:863": {
+"genre": "treatises",
+"period": "Epic"
+},
+"train/cc-by-sa/GSD36manu_train.tsv:1192": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/GSD36visnu.tsv:270": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"train/cc-by-sa/GSD36visnu.tsv:746": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"train/cc-by-sa/GSD37gautdh_u.tsv:22": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/GSD37gautdh_u.tsv:457": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/GSP28tantrava.tsv:4109": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GSP28tantrava.tsv:54": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GSP29nyamanu.tsv:2760": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GSP29nyamanu.tsv:2828": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GSP29nyamanu.tsv:6075": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GSP29nyamanu.tsv:6431": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GSP31iskamatu.tsv:208": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GSP33jimuvi.tsv:1507": {
+"genre": "rel_script",
+"period": "Medieval"
+},
+"train/cc-by-sa/GSP33jimuvi.tsv:1603": {
+"genre": "rel_script",
+"period": "Medieval"
+},
+"train/cc-by-sa/GSP33jimuvi.tsv:335": {
+"genre": "rel_script",
+"period": "Medieval"
+},
+"train/cc-by-sa/GSP33jimuvi.tsv:432": {
+"genre": "rel_script",
+"period": "Medieval"
+},
+"train/cc-by-sa/GSP33vacbhamu.tsv:1051": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GSP36sadha.tsv:456": {
+"genre": "treatises",
+"period": "Medieval"
+},
+"train/cc-by-sa/GV03sb_train.tsv:1821": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/GV03sb_train.tsv:5659": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/GV03sb_train.tsv:5785": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/GV05chupsau.tsv:1720": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GV05chupsau.tsv:2096": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GV05chupsau.tsv:2791": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GV05chupsau.tsv:2872": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GV05chupsau.tsv:4206": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GV05chupsau.tsv:600": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/GVKyajurvedu.tsv:1836": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/GVKyajurvedu.tsv:6903": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/GVsyajurvedu.tsv:1334": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/GVsyajurvedu.tsv:1485": {
+"genre": "vedic",
+"period": "Vedic"
+},
+"train/cc-by-sa/Kv.tsv:1196": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/Kv.tsv:1441": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/Kv.tsv:4168": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/Kv.tsv:4899": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/Kv.tsv:52": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/Kv.tsv:546": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/Kv.tsv:580": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/Kv.tsv:943": {
+"genre": "rel_script",
+"period": "Epic"
+},
+"train/cc-by-sa/T06sthmavt1.tsv:210": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T06sthmavt_u.tsv:1879": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T06sthtvbh.tsv:101": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T06sthtvbh.tsv:2": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T06vmvkbh_u.tsv:622": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T07vakobhku.tsv:207": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T09hjatm.tsv:1315": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T09hjatm.tsv:1448": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T09hjatm.tsv:1490": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T09hjatm.tsv:1809": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T09hjatm.tsv:2216": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T09hjatm.tsv:2285": {
+"genre": "treatises",
+"period": "Classical"
+},
+"train/cc-by-sa/T09hjatm.tsv:363": {
+"genre": "treatises",
+"period": "Classical"
+},
+"val/GK19asvbc_val.tsv:70": {
+"genre": "poetry",
+"period": "Classical"
+},
+"val/GK21sokss_val.tsv:148": {
+"genre": "poetry",
+"period": "Medieval"
+},
+"val/GK21sokss_val.tsv:430": {
+"genre": "poetry",
+"period": "Medieval"
+},
+"val/GP12skp_val.tsv:5": {
+"genre": "purana",
+"period": "Classical"
+},
+"val/GSP27yogva_val.tsv:209": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"val/GSP27yogva_val.tsv:481": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"val/K10vimkn_u_val.tsv:115": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"val/K10vimkn_u_val.tsv:380": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"val/K10vimkn_u_val.tsv:466": {
+"genre": "rel_script",
+"period": "Classical"
+},
+"val/itihasa-val-extract.tsv:353": {
+"genre": "epic",
+"period": "Epic"
+}
+}

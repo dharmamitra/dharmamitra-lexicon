@@ -1,0 +1,29 @@
+# Sanskrit texts wholly or partly reconstructed from a Tibetan/Chinese translation (2026-10-17).
+# Source: DharmaNexus SA_files.json '**Reconstruction:**' field + manual additions (MAVT checked on the Pandeya scans).
+# sa_id	en_stems	reason
+SA_T04_bsa047	T04bsa047	Partly reconstructed from the Tibetan by Gyaltsen Namdol: Bhāvanākrama II and the first folio of Bhāvanākrama I are rendered from the Tibetan.
+SA_T06_asabhs_u	-	Partly reconstructed from the Tibetan by Pralhad Pradhan: the portions lost in the manuscript are restored from the Tibetan.
+SA_T06_sthmavt4	-	Partly reconstructed from the Tibetan by Sebastian Nehrdich: lacunae of the manuscript are supplied from the Tibetan.
+SA_K01_prmosubu	-	Partly reconstructed from the Tibetan by Anukul Chandra Banerjee: lacunae of the Gilgit manuscript are supplied from the Tibetan.
+SA_T01_n883u	-	Sanskrit restored from a Chinese phonetic transcription by Alexander von Staël-Holstein; collated with the Tibetan.
+SA_T01_n901u	-	Sanskrit restored from a Chinese phonetic transcription by Lokesh Chandra.
+SA_T02_bsa045_u	-	Partly reconstructed from the Tibetan by Janardan Pandey: verses 34–50 are rendered from the Tibetan.
+SA_T02_n2914u	-	Partly reconstructed from the Tibetan by Malati J. Shendge: lacunae and missing readings are supplied from the Tibetan.
+SA_T03_bsa031_u	-	Partly reconstructed from the Tibetan by Ram Shankar Tripathi: the Abhisamayālaṅkāra kārikās are original Sanskrit; Haribhadra's Sphuṭārthā commentary is a Sanskrit restoration from the Tibetan.
+SA_T11_arhebt_u	-	Partly reconstructed from the Tibetan by Pandit Sukhlalji Sanghavi and Muni Shri Jinavijayaji: the missing folios of the Patan manuscript are supplied from the Tibetan.
+SA_T11_bsa071_u	-	Partly reconstructed from the Tibetan by Ernst Steinkellner / P.P. Gokhale: Steinkellner's reconstruction draws most of the Sanskrit from quotations in Arcaṭa's Hetubinduṭīkā; the remaining wording is rendered from the Tibetan.
+SA_T11_dhkhetuu	-	Partly reconstructed from the Tibetan by Ernst Steinkellner: Steinkellner's reconstruction draws most of the Sanskrit from quotations in Arcaṭa's Hetubinduṭīkā; the remaining wording is rendered from the Tibetan.
+SA_T11_dhnyabpu	-	Partly reconstructed from the Tibetan by Mrinalkanti Gangopadhyaya: Vinītadeva's Nyāyabinduṭīkā is a reconstruction from the Tibetan; Dharmakīrti's Nyāyabindu is original Sanskrit.
+SA_T02_Mañjuśrīyaśa_Laghukālacakratantra-Vimalaprabhā-Vol1_Upādhyāya_1986	-	Partly reconstructed from the Tibetan by Jagannatha Upadhyaya: short lacunae of the Sanskrit are supplied from the Tibetan.
+SA_T02_Abhayākaragupta_Buddhakapālatantra-Abhayapaddhati_Chog_2009	-	Partly reconstructed from the Tibetan by Chog Dorje: missing portions (e.g. the paṭala names) are restored from the Tibetan.
+SA_T02_Puṇḍarīka_Vimalaprabhā-Laghukālachakratantra_Upadhyaya_1986	-	Partly reconstructed from the Tibetan by Jagannatha Upadhyaya: a short passage at the end of paṭala 2 is rendered from the Tibetan.
+SA_K12_Āgama_Uṣṇīṣavijayādhāraṇī_Yuyama	-	Sanskrit restored from a Chinese phonetic transcription by Akira Yuyama.
+SA_T01_Harṣa_Aṣṭamahācaityavandanā	-	Sanskrit restored from a Chinese phonetic transcription by Sylvain Lévi.
+SA_T01_anon_Saptajinastava	-	Sanskrit restored from a Chinese phonetic transcription by Alexander von Staël-Holstein; collated with the Tibetan.
+SA_T01_Puṇḍarīka_﻿Paramārthasevā	-	Partly reconstructed from the Tibetan by Francesco Sferra: a few damaged phrases and pādas (e.g. v. 35) are restored from the Tibetan.
+SA_T06_sthmavt	T06sthmavt_u	Pandeya 1971 ed.; Ṭīkā lacunae restored from the Tibetan (checked on the scans)
+SA_T06_sthmavtyg	-	Yamaguchi 1934 ed.; lacunae restored from the Tibetan
+SA_T06_sthmavt1	T06sthmavt1	Friedman 1937 ed. of chapter 1; lacunae restored from the Tibetan
+SA_T07_hvsatssu	-	Sanskrit is a reconstruction from the Chinese (old metadata.tsv)
+SA_T11_arhebt2u	-	Hetubinduṭīkā, second e-text of the same Patan-MS edition with restorations from the Tibetan
+SA_K10_bsu039_u	-	Triskandhasūtra: Sanskrit back-translation/restoration (CIHTS 2001)

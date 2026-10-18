@@ -1,72 +1,122 @@
-# dharmamitra-lexicon
+# MITRA-lexicon
 
-Word and phrase level translation spans between Sanskrit, Tibetan and Chinese Buddhist
-canonical texts, mined from aligned parallel text. Each record is one attested occurrence
-of one source term together with its translation span in the target, with character offsets.
+Lexica of attested translations from Sanskrit into English, Tibetan and Chinese, with the data, models and code
+needed to reproduce them and their evaluation.
 
-This data powers the live application at https://lexicon.dharmamitra.org/
+Every sense in the lexica is a count over a parallel corpus, and every count can be traced to its sentence pairs:
+each attestation carries the identifier of the sentence, the translation, and the character offsets of the
+equivalent within it.
 
-## Layout
+- Web interface: https://lexicon.dharmamitra.org
+- Word alignment model (student): https://huggingface.co/buddhist-nlp/qwen35-mitra-lexicon-annotation
+- Paper: *MITRA-lexicon: Lexica of attested translations from Sanskrit into English, Tibetan and Chinese* (ISCLS 2027, under review)
 
+## Lexica
+
+| Pair | Direction | Headwords | Senses | Attestations | Source corpus |
+|---|---|---:|---:|---:|---|
+| Sanskrit–English | sa→en | 418,927 | 950,845 | 3,293,993 | Mitrasaṃgraha |
+| | en→sa | 396,289 | | | |
+| Sanskrit–Tibetan | sa→bo | 529,599 | 895,229 | 4,665,998 | MITRA-parallel v3 |
+| | bo→sa | 445,176 | | | |
+| Sanskrit–Chinese | sa→zh | 223,081 | 422,074 | 2,447,898 | MITRA-parallel v3 |
+| | zh→sa | 171,780 | | | |
+| **Total** | | **2,184,852** | **2,268,148** | **10,407,889** | |
+
+Senses and attestations are properties of a pair and identical in both of its directions.
+Sanskrit texts that are wholly or partly reconstructed from a Tibetan or Chinese translation are excluded
+(`data/excluded_texts.tsv`).
+
+## Download
+
+The large files are attached to the [GitHub release v1.0](../../releases/tag/v1.0) as zstd-compressed
+line-delimited JSON. They decompress with `zstd -d --long=27 FILE.zst`, and `SHA256SUMS.txt` lists their checksums.
+
+| File | Content | Lines | License |
+|---|---|---:|---|
+| `mitra-lexicon-sa-en.sa2en.ndjson.zst`, `….en2sa…` | Sanskrit–English lexicon, complete (the version described in the paper) | 418,927 / 396,289 | CC BY-NC-ND 4.0 |
+| `mitra-lexicon-sa-en-by-sa.sa2en.ndjson.zst`, `….en2sa…` | Sanskrit–English lexicon, attestations from CC BY-SA texts only | 384,073 / 364,517 | CC BY-SA 4.0 |
+| `mitra-lexicon-sa-bo.sa2bo.ndjson.zst`, `….bo2sa…` | Sanskrit–Tibetan lexicon | 529,599 / 445,176 | CC BY-SA 4.0 |
+| `mitra-lexicon-sa-zh.sa2zh.ndjson.zst`, `….zh2sa…` | Sanskrit–Chinese lexicon | 223,081 / 171,780 | CC BY-SA 4.0 |
+| `mitra-lexicon-<pair>.spans.ndjson.zst` | span files from which the lexica were built: one row per aligned word or compound | sa-en 3,315,925; sa-en-by-sa 3,059,007; sa-bo 4,724,699; sa-zh 2,475,228 | as the lexicon of the pair |
+| `mitra-lexicon-<pair>.alignments.ndjson.zst` | aligner output for every sentence pair, with its quality signals | sa-en 395,528; sa-en-by-sa 365,854; sa-bo 566,068; sa-zh 340,691 | as the lexicon of the pair |
+
+### Lexicon entries
+
+```json
+{"sa": "kṛpā",
+ "senses": [
+   {"en": "mercy", "count": 151,
+    "ex": [{"id": "train/cc-by-sa/GE07hv_conpu.tsv:1716",
+            "target": "Going out a-hunting the king Shāntanu, out of mercy, took them up.",
+            "start": 46, "end": 51,
+            "src": "kṛpayā tac ca jagrāha śaṃtanur mṛgayāṃ gataḥ /",
+            "license": "cc-by-sa", "indices": [1]}, ...]},
+   {"en": "compassion", "count": 110, "ex": [...]},
+   {"en": "pity", "count": 86, "ex": [...]}, ...],
+ "n": 604, "n_senses": 38}
 ```
-<language-pair>/<src_text>_<tgt_text>.jsonl
-```
 
-Language pairs are sa-bo (Sanskrit to Tibetan), sa-zh (Sanskrit to Chinese) and zh-bo
-(Chinese to Tibetan). Files are grouped by the source text and target text they come from,
-where the text id is the segment id up to the colon (for example SA_T06_bsa065:36 gives the
-text SA_T06_bsa065). Any file larger than 90 MB is split into parts named
-`<src_text>_<tgt_text>-01.jsonl`, `-02.jsonl` and so on; files that fit in one part have no
-numeric suffix.
+- `sa` (or `en`, `bo`, `zh` in the reverse lexica): the headword. Sanskrit headwords are DCS lemmas, compounds
+  keyed on their hyphenated members with the final member reduced to its stem (`kuśala-mūla`), or sandhied
+  surface forms of compounds as they stand in the text.
+- `n`: the number of attestations of the headword. `n_senses`: the number of senses.
+- `senses`: ranked by `count`, the number of attestations of the sense. `ex` lists all of them.
+- `ex[].id`: the sentence identifier. For Sanskrit–English, it gives the Mitrasaṃgraha split, the license group,
+  the text file and the line. For Sanskrit–Tibetan and Sanskrit–Chinese, it is the identifier of the
+  MITRA-parallel sentence pair (Sanskrit segment and Tibetan or Chinese segment), and `tgt_segnr` lists the
+  target segments.
+- `ex[].target`, `start`, `end`: the translation and the character offsets of the equivalent within it.
+- `ex[].indices`: the 1-based positions of the headword in the analyzed Sanskrit sentence.
+- `ex[].src`: the Sanskrit sentence (Sanskrit–English only).
+- `ex[].low_coverage`: present and true when the aligner tagged few words of the sentence.
+- `forms` (compound entries): the case forms that occur, with their number of attestations.
 
-## Record fields
+### Span rows
 
-One JSON object per line.
+Each row is one aligned Sanskrit word (`type: token`) or compound (`type: phrase`), with `head`, `lemma`,
+`sanskrit` (surface form), the equivalent (`en`, `bo` or `zh`), `start` / `end` in `target`, the sentence
+identifier, the Sanskrit sentence (`src_sentence`) and the translation (`target`).
 
-```
-type         token (single word) or phrase (multi word, compound or collocation)
-head         the headword (lemma for tokens, surface form for phrases)
-lemma        source lemma (Sanskrit pairs)
-sanskrit     source surface form (Sanskrit pairs)
-zh / bo      the source or target word, depending on the pair
-indices      source token indices the span covers
-start, end   character offsets of the span inside the target sentence
-sentence_id  combined source and target segment id
-src_segnr    source segment numbers
-tgt_segnr    target segment numbers
-source       provenance of the alignment (model, gemini, or cache)
-target       the full target sentence
-src_sentence the full source sentence
-```
+### Alignment rows
 
-## How it was created
+Each row is one sentence pair as aligned by the student. It contains `id`, `target`, the Sanskrit sentence
+(`src_original`), the analyzer output (`toks`: surface form and lemma per word), the tagged model `output`,
+the extracted spans (`aligns`: tag number → span) and the quality signals that the filters of the paper use:
+`conf` (mean token log-probability), `ung_frac` (share of ungrounded spans), `coverage`, `verse`,
+`numbering_bad`, `verbatim` and `flagged`.
 
-1. Parallel sentence pairs are mined from aligned canonical text, then filtered by length
-   ratio and lexical overlap so only plausible translations remain.
-2. The source side is enriched. Sanskrit is lemmatized and segmented. Chinese is word
-   segmented with a finetuned segmentation model.
-3. Span projection. A finetuned Gemma model reads the segmented source and the target
-   sentence and inserts numbered tags into the target, one span per source token, marking
-   the stretch of target text that translates that token. Every predicted span is required
-   to be a literal substring of the target sentence, which removes hallucinated output.
-4. For sa-bo and sa-zh, low confidence sentences (verse, low coverage, low model confidence)
-   were re-aligned with gemini-3.1-flash-lite. For zh-bo the finetuned model alone was used,
-   since a blind LLM judge found the redo step gave no measurable improvement over it.
-5. Multi word terms are reconstructed by stitching adjacent source tokens (compounds and
-   their contiguous sub compounds for Sanskrit, real adjacency in the Chinese for Chinese
-   source), and the resulting phrase spans are recorded alongside the single word spans.
-6. For every occurrence the character offsets of the span inside the target sentence are
-   stored so the match can be highlighted in the original text.
+## Repository contents
 
-Statistical aligners (eflomal) and neural embedding aligners (awesome-align) were evaluated
-against this method on the same data and scored well below it in a blind LLM arena, so the
-span projection output is what is released here.
+| Path | Content | License |
+|---|---|---|
+| `data/gold/` | 100 Sanskrit–English sentences aligned independently by three Sanskritists (A–C), the scorer and the outputs of every student | CC BY-NC-ND 4.0 |
+| `data/teacher/` | teacher-labeled seeds, raw teacher calls, the 9,366-example training mixture, 1,489 held-out teacher labels, a second teacher run, and the predictions of every student | CC BY-NC-ND 4.0 |
+| `data/excluded_texts.tsv` | Sanskrit texts excluded as reconstructions | CC BY-SA 4.0 |
+| `code/` | annotation, teacher labeling, student training, mining, lexicon building, baselines, evaluation | MIT |
 
-## License
+`data/gold/README.md`, `data/teacher/README.md` and `code/README.md` describe each part, and how to reproduce
+the tables of the paper.
 
-This data is released under CC BY 4.0. You are free to share and adapt it as long as you give appropriate credit.
+## Licenses
 
-Beyond that requirement, a request. If you use this data in a public facing downstream
-application, please acknowledge the Dharmamitra project, and we would appreciate hearing from
-you at dharmamitra-project@gmail.com, ideally before you launch, so we can stay aware of how
-the data is being used and help where useful.
+Every attestation reproduces its sentence pair, so the lexica inherit the licenses of their source texts.
+
+- **Sanskrit–English** comes in two versions.
+  - `sa-en-by-sa` contains only attestations from Mitrasaṃgraha texts under CC BY-SA (92.3% of the
+    attestations) and is released under CC BY-SA 4.0.
+  - The complete lexicon also contains attestations from texts under CC BY-NC-ND (4.3%) and from the
+    validation and test splits of Mitrasaṃgraha (3.4%), for which no license is stated. It is released under
+    CC BY-NC-ND 4.0.
+- **Sanskrit–Tibetan and Sanskrit–Chinese** are released under CC BY-SA 4.0.
+- **Gold and teacher data** are released under CC BY-NC-ND 4.0, since they contain lines from texts under
+  that license.
+- **Code** is released under MIT.
+
+See `LICENSE.md`. If you use the data in a public-facing application, please acknowledge the Dharmamitra
+project. We would also appreciate hearing from you at dharmamitra-project@gmail.com.
+
+## Earlier release
+
+Until October 2026 this repository held an earlier, unrelated release of span data (sa-bo, sa-zh, zh-bo; June
+2026). It is preserved in the branch [`legacy-2026-06`](../../tree/legacy-2026-06) and the tag `legacy-2026-06`.

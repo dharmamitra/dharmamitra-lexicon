@@ -109,6 +109,17 @@ Steps in the order they were run. Paper sections in brackets.
 subset of Sanskrit–English (attestations with `license: cc-by-sa`; counts and `forms` recomputed), the alignment
 files, and the zstd-compressed assets with `SHA256SUMS.txt`.
 
+**Chinese–Tibetan (release v1.1, not in the paper).** `4-mining/run_zhbo.sh` runs all stages:
+1. `1-analysis/prep_v3_zhbo_substrate.py todo`: the distinct Chinese strings of MITRA-parallel v3 bo-zh without a
+   segmentation from the earlier zh-bo substrate. `kokuyaku_translate_hf.py` renders them into kundoku Japanese
+   with the kokuyaku model (Qwen3.5-0.8B, checkpoint path in the script, not released) and
+   `segment_zh_from_japanese.py` keeps the runs of Chinese characters as words. `prep_v3_zhbo_substrate.py write`
+   → `zh-bo/substrate.ndjson`.
+2. `4-mining/mine_v4.py --direction zh-bo-v3` with the three-epoch 9B student.
+3. `5-build/prepare_finals.py zh-bo` → `run_direction.sh zh-bo` (`build_zhbo_spans.py`, `build_zhbo_bidict.py`,
+   then the filters of step 5.2). No `dedup_ex_all.py` (every attestation is kept) and none of the Sanskrit postprocessing of step 6.
+4. `7-assembly/release_v1.1_build_assets.sh`: the v1.0 assets plus the four Chinese–Tibetan files.
+
 ## Baselines
 
 `baselines/stat_baselines.py`: fast_align, MGIZA++ (grow-diag-final-and) and eflomal on the same sentence pairs;

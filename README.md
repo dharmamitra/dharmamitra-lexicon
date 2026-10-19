@@ -27,10 +27,32 @@ Senses and attestations are properties of a pair and identical in both of its di
 Sanskrit texts that are wholly or partly reconstructed from a Tibetan or Chinese translation are excluded
 (`data/excluded_texts.tsv`).
 
+### Tibetan–Chinese (release v1.1)
+
+Release v1.1 adds a Chinese–Tibetan lexicon, built with the same student, filters and lexicon building as
+Sanskrit–Tibetan and Sanskrit–Chinese. It is not part of the paper.
+
+| Pair | Direction | Headwords | Senses | Attestations | Source corpus |
+|---|---|---:|---:|---:|---|
+| Chinese–Tibetan | zh→bo | 476,325 | 847,917 | 3,137,968 | MITRA-parallel v3 (bo-zh) |
+| | bo→zh | 433,658 | | | |
+
+- The corpus is the 712,023 Tibetan–Chinese sentence pairs of MITRA-parallel v3. 710,585 were aligned. The other
+  1,438 exceed the prompt length limit of the mining run (1,900 tokens).
+- Chinese is the source side. It is segmented into words as in the zh-bo training seeds: a Qwen3.5-0.8B model
+  fine-tuned on kokuyaku renders the Chinese into kundoku Japanese, the kana are removed, and the remaining
+  runs of Chinese characters are the words. Chinese headwords are therefore such runs and may be longer than
+  a dictionary word.
+- Tibetan headwords and senses are in Wylie.
+- Entries have the format of the Sanskrit–Tibetan lexicon, with `zh` in place of `sa`. `ex[].indices` are the
+  positions of the headword in the segmented Chinese sentence. The Chinese sentence is in the span rows
+  (`src_sentence`).
+
 ## Download
 
-The large files are attached to the [GitHub release v1.0](../../releases/tag/v1.0) as zstd-compressed
+The large files are attached to the [GitHub release v1.1](../../releases/tag/v1.1) as zstd-compressed
 line-delimited JSON. They decompress with `zstd -d --long=27 FILE.zst`, and `SHA256SUMS.txt` lists their checksums.
+Release v1.1 contains the files of [v1.0](../../releases/tag/v1.0) unchanged, plus the four Tibetan–Chinese files.
 
 | File | Content | Lines | License |
 |---|---|---:|---|
@@ -38,8 +60,9 @@ line-delimited JSON. They decompress with `zstd -d --long=27 FILE.zst`, and `SHA
 | `mitra-lexicon-sa-en-by-sa.sa2en.ndjson.zst`, `….en2sa…` | Sanskrit–English lexicon, attestations from CC BY-SA texts only | 384,073 / 364,517 | CC BY-SA 4.0 |
 | `mitra-lexicon-sa-bo.sa2bo.ndjson.zst`, `….bo2sa…` | Sanskrit–Tibetan lexicon | 529,599 / 445,176 | CC BY-SA 4.0 |
 | `mitra-lexicon-sa-zh.sa2zh.ndjson.zst`, `….zh2sa…` | Sanskrit–Chinese lexicon | 223,081 / 171,780 | CC BY-SA 4.0 |
-| `mitra-lexicon-<pair>.spans.ndjson.zst` | span files from which the lexica were built: one row per aligned word or compound | sa-en 3,315,925; sa-en-by-sa 3,059,007; sa-bo 4,724,699; sa-zh 2,475,228 | as the lexicon of the pair |
-| `mitra-lexicon-<pair>.alignments.ndjson.zst` | aligner output for every sentence pair, with its quality signals | sa-en 395,528; sa-en-by-sa 365,854; sa-bo 566,068; sa-zh 340,691 | as the lexicon of the pair |
+| `mitra-lexicon-zh-bo.zh2bo.ndjson.zst`, `….bo2zh…` | Chinese–Tibetan lexicon (v1.1) | 476,325 / 433,658 | CC BY-SA 4.0 |
+| `mitra-lexicon-<pair>.spans.ndjson.zst` | span files from which the lexica were built: one row per aligned word or compound | sa-en 3,315,925; sa-en-by-sa 3,059,007; sa-bo 4,724,699; sa-zh 2,475,228; zh-bo 3,163,042 | as the lexicon of the pair |
+| `mitra-lexicon-<pair>.alignments.ndjson.zst` | aligner output for every sentence pair, with its quality signals | sa-en 395,528; sa-en-by-sa 365,854; sa-bo 566,068; sa-zh 340,691; zh-bo 710,585 | as the lexicon of the pair |
 
 ### Lexicon entries
 
@@ -108,7 +131,7 @@ Every attestation reproduces its sentence pair, so the lexica inherit the licens
   - The complete lexicon also contains attestations from texts under CC BY-NC-ND (4.3%) and from the
     validation and test splits of Mitrasaṃgraha (3.4%), for which no license is stated. It is released under
     CC BY-NC-ND 4.0.
-- **Sanskrit–Tibetan and Sanskrit–Chinese** are released under CC BY-SA 4.0.
+- **Sanskrit–Tibetan, Sanskrit–Chinese and Chinese–Tibetan** are released under CC BY-SA 4.0.
 - **Gold and teacher data** are released under CC BY-NC-ND 4.0, since they contain lines from texts under
   that license.
 - **Code** is released under MIT.

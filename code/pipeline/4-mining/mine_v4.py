@@ -25,6 +25,10 @@ DIRS = {
                      pairids=None, kind="sanskrit", src_field="root", tgt_field="par"),
     "sa-zh-v2": dict(sp="/mnt2/code/mitra-dictionaries/qwen-dictionaries-v4/sa-zh", glob="substrate.ndjson",
                      pairids=None, kind="sanskrit", src_field="root", tgt_field="par", target="chinese"),
+    # zh-bo v4 (2026-10-19): MITRA-parallel v3 bo-zh pairs (root = Tibetan target, par = Chinese source) with the
+    # kundoku segmentation of the seeds (prep_v3_zhbo_substrate.py)
+    "zh-bo-v3": dict(sp="/mnt2/code/mitra-dictionaries/qwen-dictionaries-v4/zh-bo", glob="substrate.ndjson",
+                     pairids=None, kind="chinese", src_field="par", tgt_field="root"),
     "sa-bo": dict(sp="sa-bo/sentence-pairs-enriched", glob="sa-bo_matches_*.ndjson",
                   pairids=None, kind="sanskrit", src_field="root", tgt_field="par"),
     "zh-bo": dict(sp="zh-bo/sentence-pairs", glob="bo-zh_matches_*.filtered.ndjson",

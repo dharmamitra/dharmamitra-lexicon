@@ -24,20 +24,22 @@ variables below. Most scripts accept environment overrides:
   (`~/code/dharmanexus-sanskrit-processing`, imported by `enrich_saen.py`), with its CTranslate2 model.
 - Training framework `lme` (imported by `3-student/run_dictmining.py` and `dictionary_mining.py`; data processors,
   model mixins and the SFT pipeline). The experiment definitions used for the paper are in `dictionary_mining.py`.
-- Python packages: `vllm`, `transformers`, `google-genai`, `pyewts`, `rapidfuzz`, `pyahocorasick`, `bitsandbytes`.
+- Python packages: `vllm`, `transformers`, `google-genai`, `pyewts`, `rapidfuzz`, `pyahocorasick`, `bitsandbytes`,
+  `indic_transliteration` (evaluation).
 - Statistical aligners for the baselines: fast_align, MGIZA++, eflomal.
 
 **Data not included.** Corpora and reference dictionaries are not redistributed here:
 - Mitrasaṃgraha (`github.com/dharmamitra/mitrasamgraha-dataset`), MITRA-parallel v3, DharmaNexus segment files.
-- Reference dictionaries for the evaluation: Monier-Williams 1872 and Apte 1890 (Cologne Digital Sanskrit
-  Dictionaries, `sanskrit-lexicon.uni-koeln.de`; read from a SQLite file `dict.sqlite`, constant `DB` in
-  `eval/eval_sa_en.py`), Negi's Tibetan–Sanskrit dictionary (Steinert's collection,
+- Reference dictionaries for the evaluation: Monier-Williams 1899 and Apte 1890 (Cologne Digital Sanskrit
+  Dictionaries, `sanskrit-lexicon.uni-koeln.de`). Monier-Williams is read from the Cologne source file `mw.txt`
+  (`github.com/sanskrit-lexicon/csl-orig`, `v02/mw/mw.txt`; constant or environment variable `MW99` in
+  `eval/eval_sa_en.py`), Apte from a SQLite file `dict.sqlite` (constant `DB`), Negi's Tibetan–Sanskrit dictionary (Steinert's collection,
   `github.com/christiansteinert/tibetan-dictionary`; constant `NEGI` in `eval/negi.py`), Hirakawa's Buddhist
   Chinese–Sanskrit Dictionary (`HIRA`; not freely available). The Hirakawa layer of the web interface
   (`5-build/build_hirakawa_layer.py`) is built from the same file and is not part of the release.
 - `6-postprocess/postprocess_final.py` needs `dnx_counts.pkl` (lemma/form counts over DharmaNexus Sanskrit,
-  produced by `dnx_counts.py`) and `ref_allowlist_mw_apte.txt` (the headwords of Monier-Williams and Apte, one
-  per line, derived from the Cologne data). `5-build/tib_norm.py` expects `tib_verb_map.json` under
+  produced by `dnx_counts.py`) and `ref_allowlist_mw_apte.txt` (the headwords of Monier-Williams 1872 and
+  Apte, one per line, derived from the Cologne data; this build filter used the 1872 edition). `5-build/tib_norm.py` expects `tib_verb_map.json` under
   `refresh2026/` relative to the script.
 - The DCS corpus (`novel.py`, constant `DCS`) for the lemma-coverage evaluation.
 
@@ -128,7 +130,7 @@ link F1 against the held-out teacher labels, lexica built from their links. Runn
 
 ## Evaluation
 
-`eval/run_set.sh` runs everything on the released set (CPU): `run_all.sh` (`eval_sa_en.py` vs Monier-Williams/Apte,
+`eval/run_set.sh` runs everything on the released set (CPU): `run_all.sh` (`eval_sa_en.py` vs Monier-Williams 1899/Apte,
 `eval_sa_bo.py` vs Negi, `eval_sa_zh.py` vs Hirakawa, `make_report.py`), the Negi variant restricted to attested
 equivalents, `novel.py`, `lemma_coverage.py`, `attestation_composition.py`, `hirakawa_compare.py`,
 `hirakawa_gap/overview.py`, `paper_numbers.py`, `negi_recover.py`. Further: `hapax_sample.py` (review sample of

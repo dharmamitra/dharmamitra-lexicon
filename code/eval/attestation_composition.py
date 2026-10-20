@@ -11,7 +11,7 @@ import json, os, re, collections
 
 MINED = os.environ.get("EVAL_MINED_DIR", "/mnt2/code/mitra-dictionaries/paper-final-output-20261011")
 DNX = os.path.expanduser("~/data/dharmanexus-sanskrit")
-OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/attestation-composition.json"
+OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/attestation-composition.json"
 SPLIT = re.compile(r"_(train|test|val|valid|validation|dev)(?=\.tsv$)")
 
 

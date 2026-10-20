@@ -5,7 +5,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from fuzzy import H, Z, fold
 import ahocorasick
 lit = lambda x: ast.literal_eval(x) if isinstance(x, str) else x
-P = "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/parts"
+P = "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/parts"
 V = {"current": dict(fo=os.environ["EVAL_MINED_DIR"], pairs=os.environ["CORPUS_SA_ZH"], layer=os.environ["LAYER"],
                    ev=f"{P}/sa-zh.json")}
 SC = pickle.load(open(os.path.join(HERE, "scan.pkl"), "rb")); canon = set(SC["occ"])
@@ -61,4 +61,4 @@ for name, v in V.items():
 keys = list(out["current"].keys())
 print(f"{'':58}" + "".join(f"{n:>16}" for n in V))
 for k in keys: print(f"{k:58}" + "".join(f"{str(out[n][k]):>16}" for n in V))
-json.dump(out, open(os.environ.get("OUT", "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/hirakawa-gap.json"), "w"), ensure_ascii=False, indent=1)
+json.dump(out, open(os.environ.get("OUT", "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/hirakawa-gap.json"), "w"), ensure_ascii=False, indent=1)

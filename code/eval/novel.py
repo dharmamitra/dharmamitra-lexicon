@@ -12,14 +12,14 @@ Reuses the reference parsing, normalisation and matching of eval_sa_{bo,zh,en}.p
              even under the most lenient criterion (relaxed containment for Tibetan and
              Chinese; MW u Apte prose criterion for English, untranslated loans set aside).
 
-Outputs: /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/novel.json, /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/novel-samples.md (CPU only, ~2 minutes).
+Outputs: /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/novel.json, /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/novel-samples.md (CPU only, ~2 minutes).
 """
 import collections, importlib, json, os, random, sys, tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import common as C
 
-OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018"
+OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020"
 LENIENT = {"sa-bo": "relaxed", "sa-zh": "relaxed", "sa-en": "mw_apte"}
 STRICT = {"sa-bo": "strict", "sa-zh": "strict", "sa-en": "mw_apte"}
 MODULE = {"sa-bo": "eval_sa_bo", "sa-zh": "eval_sa_zh", "sa-en": "eval_sa_en"}

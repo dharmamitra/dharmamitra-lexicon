@@ -12,7 +12,7 @@ import json, os, re, random, unicodedata, collections
 from multiprocessing import Pool
 
 MINED_DIR = os.environ.get("EVAL_MINED_DIR", "/mnt2/code/mitra-dictionaries/qwen-dictionaries/final-output")
-OUT_DIR = "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018"
+OUT_DIR = "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020"
 NPROC = int(os.environ.get("EVAL_NPROC", "48"))
 SEED = 42
 

@@ -1,9 +1,9 @@
 """Fresh hapax sample (2026-10-18): 20 random sa->X entries with n == 1 per pair from the released norecon lexica.
-Writes notes/eval-lfix-20261018/hapax-resample/hapax-sa{en,bo,zh}-entries.md."""
+Writes notes/eval-mw99-20261020/hapax-resample/hapax-sa{en,bo,zh}-entries.md."""
 import json, random, ast, re
 M = "/mnt2/code/mitra-dictionaries"
 P = f"{M}/paper-v4-20261017-norecon"
-OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/hapax-resample"
+OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/hapax-resample"
 PAIRS = [("en", "skt_en", f"{M}/norecon-20261017/sa-en.mined.ndjson", "English"),
          ("bo", "skt_tib", f"{M}/norecon-20261017/sa-bo.final.ndjson", "Tibetan, Wylie"),
          ("zh", "skt_zh", f"{M}/norecon-20261017/sa-zh.final.ndjson", "Chinese")]

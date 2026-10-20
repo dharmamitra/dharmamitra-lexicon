@@ -4,7 +4,7 @@
 Negi: citations of texts (non-lexical sigla) with their locus, grouped by a hand-made siglum -> text -> domain map
 (identifications are ours; sigla we could not identify go to 'unidentified').
 Ours: sentence pairs of sa-bo/hybrid/final.ndjson by the DharmaNexus category of the Sanskrit text, grouped into
-the same domains. Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/negi-domains.json and a printed table.
+the same domains. Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/negi-domains.json and a printed table.
 """
 import os, collections, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -78,7 +78,7 @@ def main():
         l, o = len(loci[d]), ours[d]
         res[d] = dict(negi_citations=cites[d], negi_loci=l, negi_sources=len(texts[d]), ours_pairs=o, ours_texts=len(our_texts[d]))
         print(f"{d:24} {l:10,d} {100*l/nl:6.1f} {len(texts[d]):8d} | {o:10,d} {100*o/no:6.1f} {len(our_texts[d]):6d}")
-    json.dump(res, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/negi-domains.json", "w"), ensure_ascii=False, indent=1)
+    json.dump(res, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/negi-domains.json", "w"), ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

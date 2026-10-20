@@ -5,7 +5,7 @@ Hirakawa (in our digitization) gives no sources, so we locate each equivalent in
 Chinese segments, ZH_T*). Only equivalents of two or more characters that occur in at most MAXTEXTS texts are used
 (specific strings); each spreads a weight of 1 over the texts it occurs in. The same is done for the equivalents
 we share with Hirakawa, as a baseline, and every text is marked by whether it is part of our Sanskrit-Chinese corpus.
-Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/hirakawa-texts.json and a printed ranking.
+Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/hirakawa-texts.json and a printed ranking.
 """
 import collections, glob, json, os, re, sys
 from multiprocessing import Pool
@@ -93,7 +93,7 @@ def main():
         for t, v in w.most_common(30):
             acc += v
             print(f"   {t:16} {v:7.1f} {100*acc/tot:5.1f}%  {'OURS' if t in ours else '    '}  {meta.get(t, '')[:60]}")
-    json.dump(res, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/hirakawa-texts.json", "w"), ensure_ascii=False, indent=1)
+    json.dump(res, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/hirakawa-texts.json", "w"), ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

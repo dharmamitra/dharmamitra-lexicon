@@ -8,7 +8,7 @@ whether the quoted Sanskrit occurs (any 4-word sequence, normalised) in the Sans
 of MITRA-parallel v2, and of v1. Tallied per source siglum. The same is done for a sample of equivalents we DO
 have, as a baseline.
 
-Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/negi-sources.json and printed tables.
+Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/negi-sources.json and printed tables.
 """
 import os, collections, glob, gzip, json, os, re, sys
 os.environ["NEGI_ATTESTED"] = "1"
@@ -137,7 +137,7 @@ def main():
             print("   by siglum (citations | % found in ours | v2 | v1):")
             for sg, c in sorted(by_sg.items(), key=lambda kv: -kv[1]["cites"])[:40]:
                 print(f"     {sg:12} {c['cites']:6d} | {100*c['ours']/c['cites']:5.1f} | {100*c['v2']/c['cites']:5.1f} | {100*c['v1']/c['cites']:5.1f}")
-    json.dump(res, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/negi-sources.json", "w"), ensure_ascii=False, indent=1)
+    json.dump(res, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/negi-sources.json", "w"), ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

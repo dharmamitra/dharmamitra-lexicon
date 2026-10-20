@@ -2,7 +2,7 @@
 usage: baseline_numbers.py DIR...   (DIR = sa-bo / sa-zh; work dir from BASELINE_WORK)"""
 import json, os, sys
 W = os.environ.get("BASELINE_WORK", "/mnt2/code/mitra-dictionaries/qwen-dictionaries/baselines/work-v2")
-P = os.environ.get("BASELINE_PARTS", "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/parts")
+P = os.environ.get("BASELINE_PARTS", "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/parts")
 B = ["1", "2-4", "5-19", "20-99", "100-999", ">=1000"]
 def pooled(m, bands):
     n = sum(m[b]["headwords"] for b in bands if m.get(b) and m[b].get("headwords"))

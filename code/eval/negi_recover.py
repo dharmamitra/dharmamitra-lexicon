@@ -14,7 +14,7 @@ student did with the headword in that sentence:
   overlap   the student's span for the headword overlaps the string (boundary variant)
 
 Also counts each string over the whole corpus, for an association score against chance.
-Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/negi-recover.json, /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/negi-recover-samples.md
+Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/negi-recover.json, /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/negi-recover-samples.md
 """
 import os, ast, collections, json, math, os, random, sys
 
@@ -24,7 +24,7 @@ import novel
 from tibetan import tib_key, _CLEAN, SUFFIX, FUSED
 
 CORPUS = __import__("os").environ.get("CORPUS_SA_BO", "/mnt2/code/mitra-dictionaries/qwen-dictionaries/sa-bo/hybrid/final.ndjson")
-OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018"
+OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020"
 WANT = {}        # tibetan key -> set of headword keys that lack it
 STRINGS = set()  # all wanted tibetan keys
 MAXLEN = 1

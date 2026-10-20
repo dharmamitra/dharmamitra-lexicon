@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Evaluation of the released lexicon set (paper-v4-20261017-norecon); outputs to $N.
+# Evaluation of the released lexicon set (paper-v4-20261017-norecon); outputs to $N. Sanskrit-English is judged
+# against Monier-Williams 1899 (Cologne csl-orig mw.txt, env MW99) and Apte 1890.
 set -uo pipefail
 cd "$(dirname "$0")"
-N=/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018; L=$N/logs; mkdir -p $L $N/parts
+N=/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020; L=$N/logs; mkdir -p $L $N/parts
 M=/mnt2/code/mitra-dictionaries
 export EVAL_MINED_DIR=/mnt2/code/mitra-dictionaries/paper-v4-20261017-norecon
 export HIRA=$M/mitra-dictionaries/non-english/hirakawa-reocr-2026/hirakawa_reocr.tsv

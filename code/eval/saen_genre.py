@@ -20,4 +20,4 @@ tot = sum(att.values()); ts = sum(len(v) for v in sents.values())
 print("attestations", tot, "unmapped", sum(miss.values()), miss.most_common(40))
 for k, v in att.most_common():
     print(f"{k:12} attestations {v:8d} {100*v/tot:5.1f}%   sentence pairs {len(sents[k]):7d} {100*len(sents[k])/ts:5.1f}%")
-json.dump({k: dict(attestations=v, sentence_pairs=len(sents[k])) for k, v in att.items()}, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/saen-genre.json", "w"), indent=1)
+json.dump({k: dict(attestations=v, sentence_pairs=len(sents[k])) for k, v in att.items()}, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/saen-genre.json", "w"), indent=1)

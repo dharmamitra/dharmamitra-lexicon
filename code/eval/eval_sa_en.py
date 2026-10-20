@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""sa->en: mined skt_en_bidict.sa2en.ndjson vs. Monier-Williams (1872 edition!) and Apte (1890),
-both read from alignment-annotator/app/dict.sqlite (zlib-compressed entry HTML per headword).
+"""sa->en: mined skt_en_bidict.sa2en.ndjson vs. Monier-Williams (1899 edition, mw99_records(); 2026-10-20) and Apte (1890),
+Apte read from alignment-annotator/app/dict.sqlite (zlib-compressed entry HTML per headword).
 
 The reference is definitional prose, so a mined gloss MATCHES iff all its content-word stems (English stopwords
 ignored; if the gloss consists of stopwords only, all its stems) occur in the stem set of the reference text for
@@ -75,6 +75,85 @@ def mw_sections(h):
                 subs.append((k, txt))
     return head, subs, fem
 
+MW99 = os.environ.get("MW99", "/mnt2/code/mitra-dictionaries/refdicts/mw99-20261020/mw.txt")
+_CARD = "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()
+_ORD = ("first second third fourth fifth sixth seventh eighth ninth tenth eleventh twelfth thirteenth fourteenth fifteenth "
+        "sixteenth seventeenth eighteenth nineteenth twentieth").split()
+NUMW = {**{str(i + 1): w for i, w in enumerate(_CARD)}, **{"30": "thirty", "40": "forty", "50": "fifty", "60": "sixty",
+        "70": "seventy", "80": "eighty", "90": "ninety", "100": "hundred", "1000": "thousand"},
+        **{f"{i + 1}{'st' if i == 0 else 'nd' if i == 1 else 'rd' if i == 2 else 'th'}": w for i, w in enumerate(_ORD)},
+        "100th": "hundredth", "1000th": "thousandth"}
+NUM = re.compile(r"\b\d+(?:st|nd|rd|th)?\b")       # the 1899 edition writes numerals as digits ("of 4 kinds", "10th")
+MW99_DROP = re.compile(r"<(s|ls|gk|etym|lang|hom|old|arab|pb)\b[^>]*>.*?</\1>", re.S)
+
+
+def mw99_records():
+    """Monier-Williams 1899 from the Cologne source (sanskrit-lexicon/csl-orig v02/mw/mw.txt): one record per
+    headword, derivative, compound or sense paragraph (<e> 1/2 = headword/derivative, 3/4 = compound, A/B/... =
+    further sense paragraphs). -> (IAST key, e, English text). The text is the part after the headword marker "¦";
+    Sanskrit (<s>), literature references (<ls>), Greek/etymology/language labels, homonym numbers and superseded
+    readings (<old>) are removed, every other tag is unwrapped (abbreviations, <s1> names, <bot> plant names kept).
+    The 1899 edition abbreviates words repeated within an article ("gr˚ man", "th˚-eyed"): such a word is expanded to
+    the most frequent word with that prefix in the article (records since the last <e>1 record), else left as the
+    prefix. Numerals up to 20 and round numbers are written out ("4" -> "four", "10th" -> "tenth"),
+    as in the 1872 edition. Records without English content of their own that only refer to another headword ("= tūṇa", "id.") take
+    the text of that headword (one level; "id." = the preceding headword)."""
+    from indic_transliteration import sanscript
+    slp = lambda x: sanscript.transliterate(x, sanscript.SLP1, sanscript.IAST)
+    NOCONTENT = {"mfn", "ind", "see", "col", "sch", "comm", "and", "the", "also", "with", "for", "acc", "nom", "gen",
+                 "loc", "abl", "instr", "dat", "voc", "partic", "esp", "prob", "perhaps", "cf"}
+    recs = []
+    k1 = e = None; body = []
+    for line in open(MW99, encoding="utf-8"):
+        if line.startswith("<L>"):
+            k1 = re.search(r"<k1>([^<]+)", line).group(1); e = re.search(r"<e>([^<\s]+)", line).group(1); body = []
+        elif line.startswith("<LEND>"):
+            t = " ".join(body)
+            head, raw = t.split("¦", 1) if "¦" in t else ("", t)
+            hs = re.search(r"<s>([^<]*)</s>", head)
+            pre = hs.group(1).split("˚")[0] if hs and "˚" in hs.group(1) else ""
+            refs = [r if not r.startswith("˚") else pre + r[1:] for r in re.findall(r"=\s*<s>([^<]+)</s>", raw)]
+            t = MW99_DROP.sub(" ", raw)
+            t = re.sub(r"<[^>]+>", " ", t)
+            t = NUM.sub(lambda m: NUMW.get(m.group(0).lower(), m.group(0)), t)
+            recs.append([slp(k1), e, re.sub(r"\s+", " ", t).strip(), refs, "<ab>id.</ab>" in raw])
+        else:
+            body.append(line.strip())
+    # expand abbreviated words per article
+    art, start = 0, 0
+    def expand(lo, hi):
+        words = collections.Counter(w.lower() for r in recs[lo:hi] for w in re.findall(r"[A-Za-z]{3,}", r[2])
+                                    if w.lower() not in E.STOPWORDS)
+        for r in recs[lo:hi]:
+            if "˚" in r[2]:
+                def rep(m):
+                    p = m.group(1).lower()
+                    c = [(n, w) for w, n in words.items() if w.startswith(p) and len(w) > len(p)]
+                    return max(c)[1] if c else m.group(1)
+                r[2] = re.sub(r"([A-Za-z]+)˚", rep, r[2]).replace("˚", " ")
+    for i, r in enumerate(recs):
+        if r[1] == "1" and i > start:
+            expand(start, i); start = i
+    expand(start, len(recs))
+    own = collections.defaultdict(list)
+    stub = lambda r: not any(w.lower() not in NOCONTENT for w in re.findall(r"[A-Za-z]{3,}", r[2]))
+    for r in recs:
+        if not stub(r):
+            own[r[0]].append(r[2])
+    cur = prev = None                                  # prev = the preceding headword (for "id.")
+    for r in recs:
+        k, e, t, refs, idem = r
+        if k != cur:
+            prev, cur = cur, k
+        yield k, e, t
+        if stub(r):
+            targets = [slp(x.replace("-", "").replace("—", "")) for x in refs]
+            if idem and prev:
+                targets.append(prev)
+            for x in targets:
+                for t2 in own.get(x, []):
+                    yield k, e + "ref", t2
+
 
 def apte_keys(keyword):
     kw = re.sub(r"\([^)]*\)", "", keyword)
@@ -93,25 +172,22 @@ def load_reference():
     st = collections.Counter()
     con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
     ref = collections.defaultdict(lambda: {"mw": set(), "mw_main": set(), "ap": set(), "mw_txt": [], "ap_txt": []})
-    for keyword, blob in con.execute("select keyword, html from entries where dict='mw72' order by ord"):
-        st["mw72_records"] += 1
-        head, subs, fem = mw_sections(zlib.decompress(blob).decode("utf-8"))
-        k = sa_key(keyword)
+    for k1, e, txt in mw99_records():
+        if e.endswith("ref"):
+            st["mw99_crossref_texts"] += 1
+        else:
+            st["mw72_records"] += 1                  # stat names kept from the 1872 loader (make_report.py); = MW 1899
+        k = sa_key(k1)
         if not k or not IAST.match(k):
             st["mw72_records_key_rejected"] += 1
+            continue
+        ss = E.stem_set(txt)
+        r = ref[k]
+        r["mw"] |= ss; r["mw_txt"].append(txt)
+        if e[:1] in ("1", "2"):                       # headwords and derivatives; 3/4 = compounds
+            r["mw_main"] |= ss
         else:
-            ss = E.stem_set(head)
-            r = ref[k]
-            r["mw"] |= ss; r["mw_main"] |= ss; r["mw_txt"].append(head)
-            if k.endswith("a"):
-                for v in fem:            # "(ā), f. pity, compassion" inside the record of karuṇa -> also key karuṇā
-                    st["mw72_feminine_forms_keyed"] += 1
-                    r2 = ref[k[:-1] + v]
-                    r2["mw"] |= ss; r2["mw_txt"].append(head)
-        for sk, txt in subs:
             st["mw72_subentries"] += 1
-            r = ref[sk]
-            r["mw"] |= E.stem_set(txt); r["mw_txt"].append(txt)
     mw_keys = {k for k, r in ref.items() if r["mw"]}
     mw_main_keys = {k for k, r in ref.items() if r["mw_main"]}
     ap_forms = set()
@@ -235,7 +311,7 @@ def main():
     ap_cov = {f for f in ap_forms if any(c in mined_keys for c, r in stem_candidates(f))}
     out = {
         "direction": "sa-en", "mined_file": os.path.join(C.MINED_DIR, MINED),
-        "reference": {"name": "Monier-Williams 1872 (mw72) and Apte 1890 (ap90) from dict.sqlite", "file": DB,
+        "reference": {"name": "Monier-Williams 1899 (Cologne csl-orig mw.txt) and Apte 1890 (ap90) from dict.sqlite", "file": MW99 + " ; " + DB,
                       "parse_stats": dict(st)},
         "mined_file_lines": C.STATS["mined_file_lines"],
         "mined_single_word_headwords": C.band_counts([n for k, n, e in light]),

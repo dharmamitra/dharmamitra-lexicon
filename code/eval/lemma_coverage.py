@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Lemma coverage of the reference dictionaries.
 
-For each reference (Monier-Williams 1872, Apte 1890, Edgerton BHS 1953, Böhtlingk-Roth PW, Negi inverted, Hirakawa
+For each reference (Monier-Williams 1899, Apte 1890, Edgerton BHS 1953, Böhtlingk-Roth PW, Negi inverted, Hirakawa
 inverted) the set of Sanskrit keys it contains, normalised to DCS-style stems with the same rules as the evaluation
 (common.stem_candidates), and the share of
   (a) DCS lemmas by corpus frequency, and
   (b) the single-word headwords of each MITRA-dict pair with at least 20 attestations
-that it contains. Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/lemma-coverage.json and a printed table.
+that it contains. Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/lemma-coverage.json and a printed table.
 """
 import os, collections, json, os, re, sqlite3, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -49,9 +49,9 @@ def plain_keys(dict_code):
 def main():
     refs, info = {}, {}
     index, st, mw_keys, mw_main_keys, ap_forms = eval_sa_en.load_reference()
-    refs["Monier-Williams 1872"] = {k for k, r in index.items() if r["mw"]}
+    refs["Monier-Williams 1899"] = {k for k, r in index.items() if r["mw"]}
     refs["Apte 1890"] = {k for k, r in index.items() if r["ap"]}
-    refs["MW ∪ Apte"] = refs["Monier-Williams 1872"] | refs["Apte 1890"]
+    refs["MW ∪ Apte"] = refs["Monier-Williams 1899"] | refs["Apte 1890"]
     refs["Edgerton BHS"], n, v = plain_keys("bhs")
     info["Edgerton BHS"] = dict(headwords=n, finite_verb_form_headwords=v)
     refs["MW ∪ Apte ∪ BHS"] = refs["MW ∪ Apte"] | refs["Edgerton BHS"]
@@ -106,7 +106,7 @@ def main():
         res[f"{d}_of_those_in_BHS"] = len(add)
         print(f"{d}: {len(miss)} headwords (n≥20) not in MW ∪ Apte, {len(add)} of them in BHS; e.g. {miss[:25]}")
     res["_info"] = info
-    json.dump(res, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/lemma-coverage.json", "w"), ensure_ascii=False, indent=1)
+    json.dump(res, open("/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/lemma-coverage.json", "w"), ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

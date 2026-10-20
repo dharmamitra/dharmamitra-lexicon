@@ -6,7 +6,7 @@
    our Chinese at all, and together with the Sanskrit lemma? Is it a phonetic transcription?
 2. Chinese headwords by frequency band: Hirakawa headwords by occurrence in our Chinese corpus vs. our zh->sa
    headwords by attestations.
-Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/hirakawa-compare.json, /home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018/hirakawa-missing-samples.md
+Output: /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/hirakawa-compare.json, /home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020/hirakawa-missing-samples.md
 """
 import collections, json, os, random, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -16,7 +16,7 @@ import novel, eval_sa_zh as Z
 
 FINAL = os.environ.get("HIRAKAWA_FINAL", "/mnt2/code/mitra-dictionaries/qwen-dictionaries/sa-zh/hybrid/final.ndjson")
 TAG = os.environ.get("EVAL_TAG", "")  # output suffix, e.g. .v3
-OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-lfix-20261018"
+OUT = "/home/sebastian/papers/mitra-dict-2026/notes/eval-mw99-20261020"
 # characters typical of Buddhist phonetic transcription (a heuristic, not exhaustive)
 TRANSCR = set("阿婆迦羅囉哆多陀那摩訶薩埵毘鞞跋提波般若耶伽闍吒茶拏彌蜜尼梨利唎離頗槃盤叉沙娑舍奢輸首呾怛他咀嚕盧樓魯喃南曩嚩縛囀嚩鉢缽尸翅柘遮旃栴檀健犍揵乾俱拘鳩究瞿屈掘羯竭吉祇耆嚧醯呬兮枳羝底帝坻諦邏洛勒刺剌磨麼莫謨母牟悉瑟徵蘇修須輸蹉嗟差闡懺車奴怒弩褥耨那捺訥歌柯哥迦蘭攔藍爛闌")
 
